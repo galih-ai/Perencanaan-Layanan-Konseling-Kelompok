@@ -1,0 +1,49 @@
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      filter: brightness(.92);
+    }
+
+    iframe {
+      display: none;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="landing-page">
+    <h2>Selamat Datang</h2>
+    <p>di Perencanaan Layanan Konseling Kelompok</p>
+    <button type="button" onclick="bukaAplikasi()">Buka Aplikasi</button>
+  </div>
+
+  <iframe id="app-frame" title="Perencanaan Layanan Konseling Kelompok"></iframe>
+
+  <script>
+    const APP_URL = 'https://script.google.com/macros/s/AKfycbwfV0tOj6w9C2BmZwfd028LL1RM8ZCKU5ldGFA9zq0etYZ-0TTctucnougq5AKJ3fOxsw/exec';
+
+    function bukaAplikasi() {
+      const token = new URLSearchParams(window.location.search).get('token');
+
+      if (!token) {
+        alert('Akses aplikasi harus dibuka melalui landing page.');
+        return;
+      }
+
+      const landing = document.getElementById('landing-page');
+      const iframe = document.getElementById('app-frame');
+
+      iframe.src = APP_URL + '?token=' + encodeURIComponent(token);
+      landing.style.display = 'none';
+      iframe.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
